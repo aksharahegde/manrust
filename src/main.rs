@@ -1,4 +1,5 @@
 mod app;
+mod colorize;
 mod config;
 mod man;
 mod search;
@@ -46,6 +47,9 @@ fn main() -> Result<()> {
                                 KeyCode::Char('q') => {
                                     should_quit = true;
                                 }
+                                KeyCode::Char('l') => {
+                                    app.focus_list();
+                                }
                                 KeyCode::Char(c) => {
                                     app.update_search_query(format!("{}{}", app.search_query, c));
                                 }
@@ -72,6 +76,12 @@ fn main() -> Result<()> {
                             match key.code {
                                 KeyCode::Char('q') => {
                                     should_quit = true;
+                                }
+                                KeyCode::Char('l') => {
+                                    app.focus_list();
+                                    app.in_page_search_query.clear();
+                                    app.in_page_search_matches.clear();
+                                    app.current_match_index = None;
                                 }
                                 KeyCode::Char('n') if key.modifiers == KeyModifiers::NONE => {
                                     app.next_match();
@@ -150,6 +160,9 @@ fn main() -> Result<()> {
                                 }
                                 KeyCode::Char('/') => {
                                     app.start_in_page_search();
+                                }
+                                KeyCode::Char('l') => {
+                                    app.focus_list();
                                 }
                                 KeyCode::Char('f') => {
                                     app.toggle_favorite();

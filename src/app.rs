@@ -62,7 +62,9 @@ impl App {
         let config = Config::load().unwrap_or_default();
         let theme = Theme::from_str(&config.theme);
         let available_sections = man::get_available_sections();
-        let selected_section = config.last_section.or_else(|| available_sections.first().copied());
+        let selected_section = config
+            .last_section
+            .or_else(|| available_sections.first().copied());
         let all_commands = man::discover_man_pages(selected_section)?;
         let filtered_commands = all_commands.clone();
 
@@ -97,8 +99,11 @@ impl App {
     pub fn process_search_debounce(&mut self) {
         if let Some(last_update) = self.last_search_update {
             if last_update.elapsed() >= Duration::from_millis(150) {
-                self.filtered_commands = search::filter_commands(&self.search_query, &self.all_commands);
-                if self.selected_index >= self.filtered_commands.len() && !self.filtered_commands.is_empty() {
+                self.filtered_commands =
+                    search::filter_commands(&self.search_query, &self.all_commands);
+                if self.selected_index >= self.filtered_commands.len()
+                    && !self.filtered_commands.is_empty()
+                {
                     self.selected_index = self.filtered_commands.len() - 1;
                 } else if self.filtered_commands.is_empty() {
                     self.selected_index = 0;
@@ -151,9 +156,15 @@ impl App {
     pub fn load_man_page(&mut self) -> Result<()> {
         if let Some(cmd) = self.filtered_commands.get(self.selected_index) {
             self.current_command = Some(cmd.clone());
-            
-            let cache_key = format!("{}:{}", cmd, self.selected_section.map(|s| s.to_string()).unwrap_or_default());
-            
+
+            let cache_key = format!(
+                "{}:{}",
+                cmd,
+                self.selected_section
+                    .map(|s| s.to_string())
+                    .unwrap_or_default()
+            );
+
             if let Some(cached) = self.cache.get(&cache_key) {
                 self.man_content = cached.clone();
             } else {
@@ -161,12 +172,12 @@ impl App {
                 self.cache.insert(cache_key.clone(), content.clone());
                 self.man_content = content;
             }
-            
+
             self.scroll_offset = 0;
             self.in_page_search_query.clear();
             self.in_page_search_matches.clear();
             self.current_match_index = None;
-            
+
             if let Some(ref cmd) = self.current_command {
                 self.config.add_to_history(cmd.clone());
             }
@@ -188,6 +199,10 @@ impl App {
         self.focus = FocusState::Search;
     }
 
+    pub fn focus_list(&mut self) {
+        self.focus = FocusState::List;
+    }
+
     pub fn focus_section_select(&mut self) {
         self.focus = FocusState::SectionSelect;
         if let Some(selected) = self.selected_section {
@@ -201,7 +216,8 @@ impl App {
         if let Some(&section) = self.available_sections.get(self.section_select_index) {
             self.selected_section = Some(section);
             self.all_commands = man::discover_man_pages(Some(section))?;
-            self.filtered_commands = search::filter_commands(&self.search_query, &self.all_commands);
+            self.filtered_commands =
+                search::filter_commands(&self.search_query, &self.all_commands);
             self.selected_index = 0;
             self.focus = FocusState::List;
         }
@@ -297,7 +313,8 @@ impl App {
     }
 
     pub fn is_favorite(&self) -> bool {
-        self.current_command.as_ref()
+        self.current_command
+            .as_ref()
             .map(|cmd| self.config.is_favorite(cmd))
             .unwrap_or(false)
     }
