@@ -21,13 +21,24 @@ A fast, keyboard-first terminal UI for browsing Linux/macOS man pages.
 
 ## Installation
 
+### PyPI (recommended)
+
+```bash
+pip install man-tui
+```
+
+Or with [uv](https://github.com/astral-sh/uv):
+
+```bash
+uv tool install man-tui
+```
+
 ### Prerequisites
 
-- Rust toolchain (stable)
 - `man` command available on your PATH
 - `col` command (used to clean formatting from man output)
 
-### Build from source
+### Build from source (Rust)
 
 ```bash
 cargo build --release

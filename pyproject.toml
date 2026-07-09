@@ -1,0 +1,38 @@
+[build-system]
+requires = ["maturin>=1.0,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "man-tui"
+dynamic = ["version"]
+description = "A fast, keyboard-first terminal UI for browsing Linux/macOS man pages"
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+authors = [{ name = "Akshara Hegde", email = "akshara.dt@gmail.com" }]
+keywords = ["man", "tui", "terminal", "cli", "ratatui"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Topic :: Terminals",
+    "Topic :: Utilities",
+]
+
+[project.urls]
+Homepage = "https://github.com/aksharahegde/manrust"
+Repository = "https://github.com/aksharahegde/manrust"
+Issues = "https://github.com/aksharahegde/manrust/issues"
+
+[tool.maturin]
+bindings = "bin"
+
+[tool.maturin.generate-ci.github]
+trusted-publishing = true

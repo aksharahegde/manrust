@@ -2,6 +2,13 @@
 name = "man-tui"
 version = "0.1.1"
 edition = "2021"
+description = "A fast, keyboard-first terminal UI for browsing Linux/macOS man pages"
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/aksharahegde/manrust"
+homepage = "https://github.com/aksharahegde/manrust"
+keywords = ["man", "tui", "terminal", "cli"]
+categories = ["command-line-utilities"]
 
 [dependencies]
 ratatui = "0.30"
