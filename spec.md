@@ -172,10 +172,13 @@ AppState {
 
 ```toml
 [dependencies]
-ratatui = "0.28"
-crossterm = "0.27"
+ratatui = "0.30"
+crossterm = "0.29"
 anyhow = "1.0"
 fuzzy-matcher = "0.3"
+serde = { version = "1.0", features = ["derive"] }
+toml = "1"
+dirs = "6"
 ```
 ---
 ### 📦 Directory Structure
