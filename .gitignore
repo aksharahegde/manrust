@@ -12,3 +12,6 @@ target/
 # Editor files
 .cursor/
 .vscode/
+
+# Python packaging artifacts
+dist/
