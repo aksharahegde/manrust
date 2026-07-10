@@ -1,12 +1,12 @@
-<p align="center">
-  <img src="assets/cover.png" alt="man-tui screenshot showing command search and man page viewer" width="900">
-</p>
-
 # man-tui
 
 A fast, keyboard-first terminal UI for browsing Linux/macOS man pages.
 
 `man-tui` is a Rust application built with [Ratatui](https://ratatui.rs/) and `crossterm`. It gives you a split-pane interface with fuzzy command search on the left and a scrollable man-page viewer on the right.
+
+<p>
+  <img src="assets/cover.png" alt="man-tui screenshot showing command search and man page viewer" width="900">
+</p>
 
 ---
 
